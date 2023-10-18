@@ -13,7 +13,6 @@ void display(void)
 
 	// включаем тест глубины
 	glEnable(GL_DEPTH_TEST);
-
 	// устанавливаем освещение по заданным параметрам
 	light.apply();
 
