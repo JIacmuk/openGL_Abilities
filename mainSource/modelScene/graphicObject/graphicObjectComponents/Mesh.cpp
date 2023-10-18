@@ -1,6 +1,7 @@
 #include "Mesh.h"
 #include "fstream"
 #include <sstream>
+#include <map>
 // Структура, описывающая одну вершину полигональной сетки
 // каждая вершина имеет геометрические координаты,
 // вектор нормали и текстурные координаты
@@ -50,6 +51,9 @@ void Mesh::load(string filename)
 	vector<vec2> texture;
 	// вектор для хранения индексов атрибутов, для построения вершин
 	vector<ivec3> fPoints;
+	// словарь для проверки 
+	map<string, int> vertexToIndexTable;
+	int index = 0;
 
 
 	fstream f(filename);
@@ -85,12 +89,24 @@ void Mesh::load(string filename)
 			ivec3 temp;
 			string strin;
 			for (int i = 0; i < 3; i++) {
-
 				str >> strin;
-				replace(strin.begin(), strin.end(), '/', ' ');
-				istringstream tempStr(strin);
-				tempStr >> temp.x >> temp.y >> temp.z;
-				fPoints.push_back(temp);
+				//проверяем на нахождение в словаре
+				auto it = vertexToIndexTable.find(strin);
+				if (it == vertexToIndexTable.end()) {
+					vertexToIndexTable[strin] = index;
+					indices.push_back(index);
+					//записываем в fPoints
+					replace(strin.begin(), strin.end(), '/', ' ');
+					istringstream tempStr(strin);
+					tempStr >> temp.x >> temp.y >> temp.z;
+					fPoints.push_back(temp);
+
+					index++;
+				}
+				else { 
+					int pastIndex = (*it).second;
+					indices.push_back(pastIndex);
+				}
 			}
 		}
 	}
@@ -99,7 +115,6 @@ void Mesh::load(string filename)
 	int vectorLen = fPoints.size();
 	for (int i = 0; i < vectorLen; i++) {
 		Vertex tempVertex;
-
 		int indexVert = fPoints[i][0] - 1;
 		int indexNormal = fPoints[i][2] - 1;
 		int indexTexture = fPoints[i][1] - 1;
@@ -109,14 +124,12 @@ void Mesh::load(string filename)
 			tempVertex.coord[j] = vect[indexVert][j];
 			tempVertex.normal[j] = normal[indexNormal][j];
 		}
-
 		for (int j = 0; j < 2; j++) {
 			tempVertex.texCoord[j] = texture[indexTexture][j];
 		}
-
 		this->vertices.push_back(tempVertex);
 	}
-
+ 
 }
 
 void Mesh::draw()
@@ -142,8 +155,9 @@ void Mesh::draw()
 	glNormalPointer(GL_FLOAT, 0, normalArray);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glTexCoordPointer(2, GL_FLOAT, 0, textureCoordinateArray);
-	//Выводим все вершины 
-	glDrawArrays(GL_TRIANGLES, 0, vectorLen);
+	//Выводим все вершины
+	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, indices.data());
+	//glDrawArrays(GL_TRIANGLES, 0, vectorLen);
 	//Выключаем обработку массива вершин
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_NORMAL_ARRAY);
