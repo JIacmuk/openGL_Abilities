@@ -28,7 +28,8 @@ void display(void)
 		go.draw();
 	}*/
 	// Выводим все игровые объекты
-	graphicObjects[0].draw();
+	//graphicObjects[0].draw();
+	(*field).draw();
 	for (int i = 0; i < 21; i++) {
 		for (int j = 0; j < 21; j++) {
 			if(mapObjects[i][j] != nullptr) (*mapObjects[i][j]).draw();

@@ -25,4 +25,3 @@
 using namespace std;
 using namespace glm;
 
-

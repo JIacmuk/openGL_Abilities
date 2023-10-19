@@ -1,17 +1,10 @@
 #pragma once
 #include "../modelScene/Camera.h"
-#include "../modelScene/GameObject.h"
+#include "../modelScene/GameObjectFactory.h"
 #include "../modelScene/Light.h"
-//список графических объектов
-extern vector<GraphicObject> graphicObjects;
-
-//список материалов объектов
-extern vector<shared_ptr<PhongMaterial>> materials;
-
 //матрица игровых объектов
 extern shared_ptr<GameObject> mapObjects[21][21];
-//меши 
-extern vector<shared_ptr<Mesh>> meshes;
+extern shared_ptr<GameObject> field;
 
 //камера 
 extern Camera camera;

@@ -25,4 +25,6 @@ public:
 private:
 	// массив вершин полигональной сетки
 	vector<Vertex> vertices;
+	// массив индексов
+	vector<GLuint> indices;
 };
