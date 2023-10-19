@@ -1,0 +1,34 @@
+{
+  "pathToMesh": "../AdditionalData/meshes/",
+  "pathToMaterials": "../AdditionalData/materials.json",
+  "objects": {
+    "LightObject": {
+      "mesh": "ChamferBox",
+      "material": 5
+    },
+    "HeavyObject": {
+      "mesh": "Box",
+      "material": 6
+    },
+    "BorderObject": {
+      "mesh": "Box",
+      "material": 7
+    },
+    "Player": {
+      "mesh": "Sphere",
+      "material": 5
+    },
+    "Bomb": {
+      "mesh": "Sphere",
+      "material": 6
+    },
+    "Monster": {
+      "mesh": "Sphere",
+      "material": 7
+    },
+    "Field": {
+      "mesh": "SimplePlane",
+      "material": 8
+    }
+  }
+}

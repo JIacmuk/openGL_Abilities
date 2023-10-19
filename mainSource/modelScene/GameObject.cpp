@@ -19,6 +19,7 @@ void GameObject::setPosition(int x, int y)
 void GameObject::setPosition(ivec2 position)
 {
 	this->position = position;
+	graphicObject.setPosition(vec3(position[0] - 10, 0, position[1] - 10));
 }
 
 ivec2 GameObject::getPosition()

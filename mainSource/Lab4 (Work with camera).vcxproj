@@ -139,6 +139,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="modelScene\Camera.cpp" />
     <ClCompile Include="modelScene\GameObject.cpp" />
+    <ClCompile Include="modelScene\GameObjectFactory.cpp" />
     <ClCompile Include="modelScene\graphicObject\GraphicObject.cpp" />
     <ClCompile Include="modelScene\Light.cpp" />
     <ClCompile Include="modelScene\graphicObject\graphicObjectComponents\Mesh.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="Header.h" />
     <ClInclude Include="modelScene\Camera.h" />
     <ClInclude Include="modelScene\GameObject.h" />
+    <ClInclude Include="modelScene\GameObjectFactory.h" />
     <ClInclude Include="modelScene\graphicObject\GraphicObject.h" />
     <ClInclude Include="modelScene\Light.h" />
     <ClInclude Include="modelScene\graphicObject\graphicObjectComponents\Mesh.h" />
