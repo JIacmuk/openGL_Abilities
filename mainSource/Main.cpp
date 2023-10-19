@@ -34,6 +34,10 @@ int main(int argc, char** argv)
 	// включаем первый источник света
 	glEnable(GL_LIGHT0);
 
+	// ПОЛУЧЕНИЕ ИНФОРМАЦИИ ОБ OPENGL
+	printf("GL_VENDOR = %s\n", glGetString(GL_VENDOR));
+	printf("GL_RENDERER = %s\n", glGetString(GL_RENDERER));
+	printf("GL_VERSION = %s\n\n", glGetString(GL_VERSION));
 
 	// УСТАНОВКА ФУНКЦИЙ ОБРАТНОГО ВЫЗОВА
 	// устанавливаем функцию, которая будет вызываться для перерисовки окна

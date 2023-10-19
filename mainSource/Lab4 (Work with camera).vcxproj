@@ -158,6 +158,10 @@
     <ClInclude Include="modelScene\graphicObject\graphicObjectComponents\Mesh.h" />
     <ClInclude Include="modelScene\graphicObject\graphicObjectComponents\PhongMaterial.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\AdditionalData\gameObjectType.json" />
+    <None Include="..\AdditionalData\materials.json" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
