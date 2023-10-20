@@ -2,33 +2,10 @@
 #include "fstream"
 #include <sstream>
 #include <map>
+#include <cstddef>
 // Структура, описывающая одну вершину полигональной сетки
 // каждая вершина имеет геометрические координаты,
 // вектор нормали и текстурные координаты
-
-
-
-void testOutPut(vector <ivec3> t) {
-	for (ivec3 i : t) {
-		for (int j = 0; j < 3; j++) cout << i[j] << ' ';
-		cout << '\n';
-	}
-	cout << '\n';
-}
-void testOutPut(vector <vec3> t) {
-	for (vec3 i : t) {
-		for (int j = 0; j < 3; j++) cout << i[j] << ' ';
-		cout << '\n';
-	}
-	cout << '\n';
-}
-void testOutPut(vector <vec2> t) {
-	for (vec2 i : t) {
-		for (int j = 0; j < 2; j++) cout << i[j] << ' ';
-		cout << '\n';
-	}
-	cout << '\n';
-}
 
 
 Mesh::Mesh()
@@ -39,6 +16,7 @@ Mesh::Mesh()
 Mesh::Mesh(string filename)
 {
 	load(filename);
+
 }
 
 void Mesh::load(string filename)
@@ -53,8 +31,12 @@ void Mesh::load(string filename)
 	vector<ivec3> fPoints;
 	// словарь для проверки 
 	map<string, int> vertexToIndexTable;
+	// массив вершин полигональной сетки
+	vector<Vertex> vertices;
+	// массив индексов
+	vector<GLuint> indices;
 	int index = 0;
-
+	
 
 	fstream f(filename);
 	if (!f.is_open()) {
@@ -127,45 +109,42 @@ void Mesh::load(string filename)
 		for (int j = 0; j < 2; j++) {
 			tempVertex.texCoord[j] = texture[indexTexture][j];
 		}
-		this->vertices.push_back(tempVertex);
+		vertices.push_back(tempVertex);
 	}
- 
+
+	glGenBuffers(1, &bufferIds[0]);
+	glBindBuffer(GL_ARRAY_BUFFER, bufferIds[0]);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	glGenBuffers(1, &bufferIds[1]);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bufferIds[1]);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size()* sizeof(GLuint), indices.data(), GL_STATIC_DRAW);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+	indexCount = indices.size();
 }
 
 void Mesh::draw()
 {	
-	int vectorLen = vertices.size();
-	// Получаем значения из массива вершин 
-	// формируем массив координат
-	vec3* coordinateArray = new vec3[vectorLen];
-	// формируем массив нормали
-	vec3* normalArray = new vec3[vectorLen];
-	// формируем массив текстурных координат
-	vec2* textureCoordinateArray = new vec2[vectorLen];
-	for (int i = 0; i < vectorLen; i++) {
-		coordinateArray[i] = vec3(vertices[i].coord[0], vertices[i].coord[1], vertices[i].coord[2]);
-		normalArray[i] = vec3(vertices[i].normal[0], vertices[i].normal[1], vertices[i].normal[2]);
-		textureCoordinateArray[i] = vec2(vertices[i].texCoord[0], vertices[i].texCoord[1]);
-	}
-
 	//Загружаем занчение всех вершин 
+	glBindBuffer(GL_ARRAY_BUFFER, bufferIds[0]);
 	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3, GL_FLOAT, 0, coordinateArray);
+	glVertexPointer(3, GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, coord));
+
 	glEnableClientState(GL_NORMAL_ARRAY);
-	glNormalPointer(GL_FLOAT, 0, normalArray);
+	glNormalPointer(GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, normal));
+
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	glTexCoordPointer(2, GL_FLOAT, 0, textureCoordinateArray);
-	//Выводим все вершины
-	glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, indices.data());
-	//glDrawArrays(GL_TRIANGLES, 0, vectorLen);
-	//Выключаем обработку массива вершин
+	glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), (void*)offsetof(Vertex, texCoord));
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bufferIds[1]);
+	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, NULL);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-
-	//очищаем массивы
-	delete[] coordinateArray;
-	delete[] normalArray;
-	delete[] textureCoordinateArray;
 
 }

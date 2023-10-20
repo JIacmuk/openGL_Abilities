@@ -20,7 +20,6 @@ void GameObjectFactory::init(string filename)
 		
 		string valueMesh = data["objects"][it.key()]["mesh"];
 		int valueMaterial = data["objects"][it.key()]["material"];
-		cout << it.key() << endl;
 		shared_ptr<Mesh> tempMesh(new Mesh(pathToMesh + valueMesh + ".obj"));
 		meshes.push_back(tempMesh);
 		shared_ptr<PhongMaterial> tempPhongMaterial(new PhongMaterial(pathToMaterial, valueMaterial - 1));

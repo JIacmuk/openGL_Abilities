@@ -5,14 +5,13 @@
 int main(int argc, char** argv) 
 {
 	setlocale(LC_ALL, "ru");
-	//инициализируем данные
-	initData();
 	//задаем начальное время
 	StartCounter();
 	// инициализация библиотеки GLUT
 	glutInit(&argc, argv);
 	// инициализация дисплея (формат вывода)
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
+	
 
 	// СОЗДАНИЕ ОКНА:
 	// 1. устанавливаем верхний левый угол окна
@@ -22,7 +21,11 @@ int main(int argc, char** argv)
 	// 3. создаем окно
 	glutCreateWindow("Laba_04");
 
-	
+	//Подключаем расширерение openGl
+	GLenum err = glewInit();
+
+	//инициализируем данные
+	initData();
 
 	// устанавливаем общую фоновую освещенность
 	GLfloat globalAmbientColor[] = { 0.2, 0.2, 0.2, 1.0 };
@@ -34,10 +37,6 @@ int main(int argc, char** argv)
 	// включаем первый источник света
 	glEnable(GL_LIGHT0);
 
-	// ПОЛУЧЕНИЕ ИНФОРМАЦИИ ОБ OPENGL
-	printf("GL_VENDOR = %s\n", glGetString(GL_VENDOR));
-	printf("GL_RENDERER = %s\n", glGetString(GL_RENDERER));
-	printf("GL_VERSION = %s\n\n", glGetString(GL_VERSION));
 
 	// УСТАНОВКА ФУНКЦИЙ ОБРАТНОГО ВЫЗОВА
 	// устанавливаем функцию, которая будет вызываться для перерисовки окна

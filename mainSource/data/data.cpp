@@ -44,6 +44,7 @@ int passabilityMap[21][21] = {
 
 void initData() 
 {
+
 	//Загрузка фабрики
 	gameObjectFactory.init(pathToGameObjects);
 	//Создаем поле
