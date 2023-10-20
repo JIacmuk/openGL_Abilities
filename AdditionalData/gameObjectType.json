@@ -4,27 +4,27 @@
   "objects": {
     "LightObject": {
       "mesh": "ChamferBox",
-      "material": 5
+      "material": 1
     },
     "HeavyObject": {
-      "mesh": "Box",
-      "material": 6
+      "mesh": "ChamferBox",
+      "material": 2
     },
     "BorderObject": {
       "mesh": "Box",
-      "material": 7
+      "material": 3
     },
     "Player": {
       "mesh": "Sphere",
-      "material": 5
+      "material": 4
     },
     "Bomb": {
       "mesh": "Sphere",
-      "material": 6
+      "material": 5
     },
     "Monster": {
       "mesh": "Sphere",
-      "material": 7
+      "material": 6
     },
     "Field": {
       "mesh": "SimplePlane",

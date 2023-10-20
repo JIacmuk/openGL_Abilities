@@ -22,7 +22,7 @@ public:
 	// инициализация фабрики (загрузка мешей и установка параметров материала)
 	void init(string filename);
 	// создание нового объекта заданного типа
-	shared_ptr<GameObject> create(GameObjectType type, int x, int y);
+	shared_ptr<GameObject> create(GameObjectType type, int x, int y, float z = 0);
 private:
 	// меши для каждого типа объекта
 	vector<shared_ptr<Mesh>> meshes;

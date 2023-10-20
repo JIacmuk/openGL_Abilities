@@ -27,7 +27,7 @@ void GameObjectFactory::init(string filename)
 	}
 }
 
-shared_ptr<GameObject> GameObjectFactory::create(GameObjectType type, int x, int y)
+shared_ptr<GameObject> GameObjectFactory::create(GameObjectType type, int x, int y, float z)
 {   
 	int index;
 	switch (type)
@@ -61,7 +61,7 @@ shared_ptr<GameObject> GameObjectFactory::create(GameObjectType type, int x, int
 
 	shared_ptr<GameObject> tempGameObject(new GameObject);
 	(*tempGameObject).setGraphicObject(tempGraphicObject);
-	(*tempGameObject).setPosition(x, y);
+	(*tempGameObject).setPosition(x, y, z);
 
     return tempGameObject;
 }

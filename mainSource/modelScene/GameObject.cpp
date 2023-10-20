@@ -16,6 +16,12 @@ void GameObject::setPosition(int x, int y)
 	graphicObject.setPosition(vec3(x - 10, 0, y - 10));
 }
 
+void GameObject::setPosition(int x, int y, float z)
+{
+	this->position = vec2(x, y);
+	graphicObject.setPosition(vec3(x - 10, z, y - 10));
+}
+
 void GameObject::setPosition(ivec2 position)
 {
 	this->position = position;

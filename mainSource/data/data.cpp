@@ -48,7 +48,7 @@ void initData()
 	//Загрузка фабрики
 	gameObjectFactory.init(pathToGameObjects);
 	//Создаем поле
-	field = gameObjectFactory.create(GameObjectType::FIELD, 10, 10);
+	field = gameObjectFactory.create(GameObjectType::FIELD, 10, 10, -0.5);
 	// инициализация объектов сцены
 	for (int i = 0; i < 21; i++) {
 		for (int j = 0; j < 21; j++) {

@@ -13,6 +13,7 @@ public:
 	void setGraphicObject(const GraphicObject& graphicObject);
 	// установка логических координат (два перегруженных метода для удобства)
 	void setPosition(int x, int y);
+	void setPosition(int x, int y, float z);
 	void setPosition(ivec2 position);
 	// получение текущих логических координат
 	ivec2 getPosition();
