@@ -13,6 +13,11 @@ int main(int argc, char** argv)
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
 	
 
+	// инициализация библиотеки DevIL для загрузки изображений
+	ilInit();
+	iluInit();
+	ilutInit();
+
 	// СОЗДАНИЕ ОКНА:
 	// 1. устанавливаем верхний левый угол окна
 	glutInitWindowPosition(250, 10);

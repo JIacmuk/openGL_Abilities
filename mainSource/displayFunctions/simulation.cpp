@@ -69,36 +69,38 @@ void movePlayer()
 	vec2 playerPosition = (*player).getPosition();
 	int playerPositionX = playerPosition[0];
 	int playerPositionY = playerPosition[1];
+	
 	// проверяем на возможность прохождения
 	if (GetAsyncKeyState('W'))
 	{	
 		if (passabilityMap[playerPositionX][playerPositionY - 1] == 0) (*player).move(MoveDirection::UP);
-		if (passabilityMap[playerPositionX][playerPositionY - 1] == 1 && (passabilityMap[playerPositionX][playerPositionY - 2] == 0)) {
+		if (passabilityMap[playerPositionX][playerPositionY - 1] == 1 && passabilityMap[playerPositionX][playerPositionY - 2] == 0) {
 			movePlayerWithLightBlock(MoveDirection::UP, playerPositionX, playerPositionY);
 		}
 	}
 	if (GetAsyncKeyState('A'))
 	{
 		if (passabilityMap[playerPositionX - 1][playerPositionY] == 0)(*player).move(MoveDirection::LEFT);
-		if (passabilityMap[playerPositionX - 1][playerPositionY] == 1 && (passabilityMap[playerPositionX - 2][playerPositionY] == 0)) {
+		if (passabilityMap[playerPositionX - 1][playerPositionY] == 1 && passabilityMap[playerPositionX - 2][playerPositionY] == 0) {
 			movePlayerWithLightBlock(MoveDirection::LEFT, playerPositionX, playerPositionY);
 		}
 	}
 	if (GetAsyncKeyState('S'))
 	{
 		if (passabilityMap[playerPositionX][playerPositionY + 1] == 0)(*player).move(MoveDirection::DOWN);
-		if (passabilityMap[playerPositionX][playerPositionY + 1] == 1 && (passabilityMap[playerPositionX][playerPositionY + 2] == 0)) {
+		if (passabilityMap[playerPositionX][playerPositionY + 1] == 1 && passabilityMap[playerPositionX][playerPositionY + 2] == 0 ) {
 			movePlayerWithLightBlock(MoveDirection::DOWN, playerPositionX, playerPositionY);
 		}
 	}
 	if (GetAsyncKeyState('D'))
 	{
 		if (passabilityMap[playerPositionX + 1][playerPositionY] == 0)(*player).move(MoveDirection::RIGHT);
-		if (passabilityMap[playerPositionX + 1][playerPositionY] == 1 && (passabilityMap[playerPositionX + 2][playerPositionY] == 0)) {
+		if (passabilityMap[playerPositionX + 1][playerPositionY] == 1 && passabilityMap[playerPositionX + 2][playerPositionY] == 0 ) {
 			movePlayerWithLightBlock(MoveDirection::RIGHT, playerPositionX, playerPositionY);
 		}
 	}
 }
+
 void movePlayerWithLightBlock(MoveDirection direction, int playerPositionX, int playerPositionY) {
 
 	ivec2 nextPosition;
