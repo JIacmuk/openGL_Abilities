@@ -7,6 +7,9 @@
 #include <string>
 #include <memory>
 #include <algorithm>
+
+// Подлючаем расширения для OpenGL
+#include "glew.h"
 // Подключаем библиотеку OpenGL
 #include <GL/gl.h>
 #include <GL/glu.h>

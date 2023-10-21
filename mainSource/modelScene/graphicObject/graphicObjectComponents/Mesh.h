@@ -23,8 +23,8 @@ public:
 	// вывод меша (передача всех вершин в OpenGL)
 	void draw();
 private:
-	// массив вершин полигональной сетки
-	vector<Vertex> vertices;
-	// массив индексов
-	vector<GLuint> indices;
+	// количество индексов
+	int indexCount;
+	// индексы (идентификаторы) буферов OpenGL
+	GLuint bufferIds[2];
 };

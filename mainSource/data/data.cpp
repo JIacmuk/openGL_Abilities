@@ -5,6 +5,7 @@ GameObjectFactory gameObjectFactory;
 // список игровых объектов 
 shared_ptr<GameObject> mapObjects[21][21];
 shared_ptr<GameObject> field;
+shared_ptr<GameObject> player;
 // используемая камера
 Camera camera(0, -50, -30);
 // используем свет
@@ -44,22 +45,25 @@ int passabilityMap[21][21] = {
 
 void initData() 
 {
+
 	//Загрузка фабрики
 	gameObjectFactory.init(pathToGameObjects);
 	//Создаем поле
-	field = gameObjectFactory.create(GameObjectType::FIELD, 10, 10);
+	field = gameObjectFactory.create(GameObjectType::FIELD, 10, 10, -0.5);
+	//Создаем игрока
+	player = gameObjectFactory.create(GameObjectType::PLAYER, 1, 19);
 	// инициализация объектов сцены
 	for (int i = 0; i < 21; i++) {
 		for (int j = 0; j < 21; j++) {
 			switch (passabilityMap[i][j]) {
 			case 1:
-				mapObjects[i][j] = gameObjectFactory.create(GameObjectType::LIGHT_OBJECT, j, i);
+				mapObjects[i][j] = gameObjectFactory.create(GameObjectType::LIGHT_OBJECT, i, j);
 				break;
 			case 2:
-				mapObjects[i][j] = gameObjectFactory.create(GameObjectType::HEAVY_OBJECT, j, i);
+				mapObjects[i][j] = gameObjectFactory.create(GameObjectType::HEAVY_OBJECT, i, j);
 				break;
 			case 3:
-				mapObjects[i][j] = gameObjectFactory.create(GameObjectType::BORDER_OBJECT, j, i);
+				mapObjects[i][j] = gameObjectFactory.create(GameObjectType::BORDER_OBJECT, i, j);
 				break;
 			default:
 				mapObjects[i][j] = nullptr;
@@ -75,6 +79,7 @@ void initData()
 
 	//источник света
 	light.setDiffuse(vec4(0.9, 0.9, 0.9, 1)); // цвет
-	light.setAmbient(vec4(0, 0, 0, 0)); // отражение лучей от других объектов (затемнение)
+	light.setAmbient(vec4(0.1, 0.1, 0.1, 1)); // отражение лучей от других объектов (затемнение)
 	light.setSpecular(vec4(0.5, 0.5, 0.5, 1)); // блики? но я чет разницы не вижу
+
 }

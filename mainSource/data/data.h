@@ -5,12 +5,15 @@
 //матрица игровых объектов
 extern shared_ptr<GameObject> mapObjects[21][21];
 extern shared_ptr<GameObject> field;
-
+extern shared_ptr<GameObject> player;
 //камера 
 extern Camera camera;
 
 //свет
 extern Light light;
+
+//карта проходимости
+extern int passabilityMap[21][21];
 
 //врем€ симул€ции одного кадра
 extern double simTime;
