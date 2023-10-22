@@ -3,6 +3,8 @@
 // функция вызывается при перерисовке окна
 // в том числе и принудительно, по командам glutPostRedisplay
 
+void drawField();
+
 void display(void)
 {
 	// отчищаем буфер цвета и буфер глубины
@@ -19,7 +21,7 @@ void display(void)
 	camera.apply();
 	
 	(*player).draw();
-	(*field).draw();
+	drawField();
 	for (int i = 0; i < 21; i++) {
 		for (int j = 0; j < 21; j++) {
 			if(mapObjects[i][j] != nullptr) (*mapObjects[i][j]).draw();
@@ -29,3 +31,18 @@ void display(void)
 	// смена переднего и заднего буферов
 	glutSwapBuffers();
 };
+
+void drawField() {
+	// выбираем активный текстурный блок
+	glActiveTexture(GL_TEXTURE0);
+	// разрешаем текстурирование в выбранном элементе текстурного блока
+	glEnable(GL_TEXTURE_2D);
+	// привязываем текстуру к ранее выбранному текстурному блоку
+	planeTexture.apply();
+	// указываем режим наложения текстуры (GL_MODULATE)
+	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	// выводим плоскость
+	(*field).draw();
+	// отключаем текстурирование (чтобы все остальные объекты выводились без текстур)
+	Texture::disableAll();
+}

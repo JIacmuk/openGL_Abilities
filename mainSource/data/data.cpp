@@ -6,10 +6,13 @@ GameObjectFactory gameObjectFactory;
 shared_ptr<GameObject> mapObjects[21][21];
 shared_ptr<GameObject> field;
 shared_ptr<GameObject> player;
+// текстура поля
+Texture planeTexture;
 // используемая камера
 Camera camera(0, -50, -30);
 // используем свет
 Light light(20, 25, 15);
+//используем текстуру
 //время симуляции
 double simTime;
 //данные скорости
@@ -18,6 +21,8 @@ double speedVertical;
 double speedZoom;
 //Путь к папке с игровыми объектами
 string pathToGameObjects = "../AdditionalData/GameObjectType.json";
+//Путь к изображениям
+string pathToTexture = "../AdditionalData/textures/plane.jpg";
 //карта проходимости для теста игрового движка 
 int passabilityMap[21][21] = {
 3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
@@ -45,7 +50,9 @@ int passabilityMap[21][21] = {
 
 void initData() 
 {
-
+	//Загружаем текстуру для одного объекта
+	
+	planeTexture.load(pathToTexture);
 	//Загрузка фабрики
 	gameObjectFactory.init(pathToGameObjects);
 	//Создаем поле
@@ -81,5 +88,4 @@ void initData()
 	light.setDiffuse(vec4(0.9, 0.9, 0.9, 1)); // цвет
 	light.setAmbient(vec4(0.1, 0.1, 0.1, 1)); // отражение лучей от других объектов (затемнение)
 	light.setSpecular(vec4(0.5, 0.5, 0.5, 1)); // блики? но я чет разницы не вижу
-
 }

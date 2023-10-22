@@ -6,6 +6,8 @@
 extern shared_ptr<GameObject> mapObjects[21][21];
 extern shared_ptr<GameObject> field;
 extern shared_ptr<GameObject> player;
+//текстура поля
+extern Texture planeTexture;
 //камера 
 extern Camera camera;
 

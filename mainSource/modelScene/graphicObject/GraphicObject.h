@@ -2,6 +2,8 @@
 #include "../../Header.h"
 #include "graphicObjectComponents/PhongMaterial.h"
 #include "graphicObjectComponents/Mesh.h"
+#include "graphicObjectComponents/Texture.h"
+
 // йкюяя дкъ опедярюбкемхъ ндмнцн цпютхвеяйнцн назейрю
 class GraphicObject
 {

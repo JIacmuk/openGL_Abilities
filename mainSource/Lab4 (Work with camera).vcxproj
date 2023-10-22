@@ -112,7 +112,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\freeglut\lib\x64;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\glew-2.1.0\lib\Release\x64;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\DevIL Windows SDK\lib\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\freeglut\lib\x64;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\glew-2.1.0\lib\Release\x64;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\DevIL Windows SDK\lib\x64\unicode\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glu32.lib;freeglut.lib;glew32.lib;DevIL.lib;ILU.lib;ILUT.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -141,6 +141,7 @@
     <ClCompile Include="modelScene\GameObject.cpp" />
     <ClCompile Include="modelScene\GameObjectFactory.cpp" />
     <ClCompile Include="modelScene\graphicObject\GraphicObject.cpp" />
+    <ClCompile Include="modelScene\graphicObject\graphicObjectComponents\Texture.cpp" />
     <ClCompile Include="modelScene\Light.cpp" />
     <ClCompile Include="modelScene\graphicObject\graphicObjectComponents\Mesh.cpp" />
     <ClCompile Include="modelScene\graphicObject\graphicObjectComponents\PhongMaterial.cpp" />
@@ -154,6 +155,7 @@
     <ClInclude Include="modelScene\GameObject.h" />
     <ClInclude Include="modelScene\GameObjectFactory.h" />
     <ClInclude Include="modelScene\graphicObject\GraphicObject.h" />
+    <ClInclude Include="modelScene\graphicObject\graphicObjectComponents\Texture.h" />
     <ClInclude Include="modelScene\Light.h" />
     <ClInclude Include="modelScene\graphicObject\graphicObjectComponents\Mesh.h" />
     <ClInclude Include="modelScene\graphicObject\graphicObjectComponents\PhongMaterial.h" />
