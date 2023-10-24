@@ -26,8 +26,8 @@ void display(void)
 		if (monsters[i] != nullptr) (*monsters[i]).draw();
 	}
 	// рисуем поле
-	drawField();
-
+	//drawField();
+	(*field).draw();
 	for (int i = 0; i < 21; i++) {
 		for (int j = 0; j < 21; j++) {
 			if(mapObjects[i][j] != nullptr) (*mapObjects[i][j]).draw();
@@ -44,7 +44,7 @@ void drawField() {
 	// разрешаем текстурирование в выбранном элементе текстурного блока
 	glEnable(GL_TEXTURE_2D);
 	// привязываем текстуру к ранее выбранному текстурному блоку
-	planeTexture.apply();
+	//planeTexture.apply();
 	// указываем режим наложения текстуры (GL_MODULATE)
 	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	// выводим плоскость

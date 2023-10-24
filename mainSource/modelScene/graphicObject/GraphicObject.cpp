@@ -69,11 +69,7 @@ void GraphicObject::draw()
 	//заполнямем мэш
 	if (mesh != nullptr) {
 		mesh->draw();
-	}
-	else {
-		glutSolidTeapot(1);
-	}
-	
+	}	
 	glPopMatrix();
 }
 

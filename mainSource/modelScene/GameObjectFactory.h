@@ -27,5 +27,5 @@ private:
 	// меши для каждого типа объекта
 	vector<shared_ptr<Mesh>> meshes;
 	// материалы для каждого типа объекта
-	vector<shared_ptr<PhongMaterial>> materials;
+	vector<shared_ptr<Material>> materials;
 };

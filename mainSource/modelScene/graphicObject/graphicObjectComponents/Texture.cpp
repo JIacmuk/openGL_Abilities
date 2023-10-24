@@ -1,6 +1,11 @@
 #include "Texture.h"
 #include <fstream>
 
+Texture::Texture(string filename)
+{
+	load(filename);
+}
+
 //загружаем текстуру и создаем текстурный объект
 void Texture::load(string filename)
 {
@@ -37,7 +42,6 @@ void Texture::load(string filename)
 
 		//очищаем данные
 		delete[] data;
-		
 	}
 }
 

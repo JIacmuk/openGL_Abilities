@@ -7,8 +7,6 @@ shared_ptr<GameObject> mapObjects[21][21];
 shared_ptr<GameObject> field;
 shared_ptr<GameObject> player;
 shared_ptr<GameObject> monsters[3];
-// текстура поля
-Texture planeTexture;
 // используемая камера
 Camera camera(0, -50, -30);
 // используем свет
@@ -53,7 +51,6 @@ ivec2 monsterLocation[3]{ ivec2(5, 3), ivec2(19, 5), ivec2(19, 18) };
 
 void initData() 
 {
-	planeTexture.load(pathToTexture);
 	//Загрузка фабрики
 	gameObjectFactory.init(pathToGameObjects);
 	//Создаем поле
@@ -64,8 +61,6 @@ void initData()
 	for (int i = 0; i < 3; i++) {
 		monsters[i] = gameObjectFactory.create(GameObjectType::MONSTER, monsterLocation[i].x, monsterLocation[i].y);
 	}
-
-
 	// инициализация объектов сцены
 	for (int i = 0; i < 21; i++) {
 		for (int j = 0; j < 21; j++) {

@@ -13,6 +13,7 @@ enum class TextureFilter {
 class Texture
 {
 public:
+	Texture(string filename);
 	// загрузка текстуры из внешнего файла
 	void load(string filename);
 	// применение текстуры (привзяка к текстурному блоку и установка параметров)

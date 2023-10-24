@@ -1,6 +1,8 @@
 #pragma once
 #include "../../Header.h"
 #include "graphicObjectComponents/Material.h"
+#include "graphicObjectComponents/PhongMaterial.h"
+#include "graphicObjectComponents/PhongMaterialWithTexture.h"
 #include "graphicObjectComponents/Mesh.h"
 #include "graphicObjectComponents/Texture.h"
 

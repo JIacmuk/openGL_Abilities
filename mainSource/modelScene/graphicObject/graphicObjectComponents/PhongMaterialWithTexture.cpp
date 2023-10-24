@@ -62,4 +62,14 @@ void PhongMaterialWithTexture::apply()
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, value_ptr(specular));
 	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, value_ptr(emission));
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, &shininess);
+
+	//применяем текстуру
+	// выбираем активный текстурный блок
+	glActiveTexture(GL_TEXTURE0);
+	// разрешаем текстурирование в выбранном элементе текстурного блока
+	glEnable(GL_TEXTURE_2D);
+	// привязываем текстуру к ранее выбранному текстурному блоку
+	(*texture).apply();
+	// указываем режим наложения текстуры (GL_MODULATE)
+	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 }
