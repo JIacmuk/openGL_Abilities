@@ -1,6 +1,6 @@
 #pragma once
 #include "../../Header.h"
-#include "graphicObjectComponents/PhongMaterial.h"
+#include "graphicObjectComponents/Material.h"
 #include "graphicObjectComponents/Mesh.h"
 #include "graphicObjectComponents/Texture.h"
 
@@ -23,7 +23,7 @@ public:
 	void setСolor(vec3 color);
 	vec3 getColor();
 	// Установка используемого материала
-	void setMaterial(shared_ptr<PhongMaterial> material);
+	void setMaterial(shared_ptr<Material> material);
 	// Установка используемого меша
 
 	void setMesh(shared_ptr<Mesh> mesh);
@@ -39,7 +39,7 @@ private:
 	// Матрица модели (расположение объекта) - чтоб не вычислять каждый раз
 	GLfloat* modelMatrix;
 	// Используемый материал
-	shared_ptr<PhongMaterial> material;
+	shared_ptr<Material> material;
 	// Используемый мэш
 	shared_ptr<Mesh> mesh;
 private:

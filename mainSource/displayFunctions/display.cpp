@@ -19,8 +19,8 @@ void display(void)
 
 	// устанавливаем камеру по заданным параметрам
 	camera.apply();
-	// рисуем игрока
-	(*player).draw();
+	// рисуем игрока если он есть на поле 
+	if(player != nullptr) (*player).draw();
 	// рисуем монстров
 	for (int i = 0; i < 3; i++) {
 		if (monsters[i] != nullptr) (*monsters[i]).draw();

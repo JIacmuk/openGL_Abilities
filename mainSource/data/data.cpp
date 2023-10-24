@@ -49,7 +49,7 @@ int passabilityMap[21][21] = {
 3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3
 };
 //местоположение врагов 
-vec2 monsterLocation[3]{ vec2(5, 3), vec2(19, 5), vec2(19, 18) };
+ivec2 monsterLocation[3]{ ivec2(5, 3), ivec2(19, 5), ivec2(19, 18) };
 
 void initData() 
 {
@@ -95,4 +95,9 @@ void initData()
 	light.setDiffuse(vec4(0.5, 0.5, 0.5, 1)); // цвет
 	light.setAmbient(vec4(0.2, 0.2, 0.2, 1)); // отражение лучей от других объектов (затемнение)
 	light.setSpecular(vec4(0.5, 0.5, 0.5, 1)); // блики? но я чет разницы не вижу
+
+	//заполняем карту проходимости монстрами
+	for (int i = 0; i < 3; i++) {
+		passabilityMap[monsterLocation[i].x][monsterLocation[i].y] = 3;
+	}
 }

@@ -47,7 +47,7 @@ vec3 GraphicObject::getColor()
 	return this->color;
 }
 
-void GraphicObject::setMaterial(shared_ptr<PhongMaterial> material)
+void GraphicObject::setMaterial(shared_ptr<Material> material)
 {
 	this->material = material;
 }
@@ -59,11 +59,6 @@ void GraphicObject::setMesh(shared_ptr<Mesh> mesh)
 
 void GraphicObject::draw()
 {
-	
-
-	//заполняем стек моделей
-	glColor3f(color.r, color.g, color.b);
-
 	//заполняем материал при наличии
 	if (material != nullptr) {
 		material->apply();

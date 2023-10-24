@@ -141,6 +141,7 @@
     <ClCompile Include="modelScene\GameObject.cpp" />
     <ClCompile Include="modelScene\GameObjectFactory.cpp" />
     <ClCompile Include="modelScene\graphicObject\GraphicObject.cpp" />
+    <ClCompile Include="modelScene\graphicObject\graphicObjectComponents\PhongMaterialWithTexture.cpp" />
     <ClCompile Include="modelScene\graphicObject\graphicObjectComponents\Texture.cpp" />
     <ClCompile Include="modelScene\Light.cpp" />
     <ClCompile Include="modelScene\graphicObject\graphicObjectComponents\Mesh.cpp" />
@@ -155,6 +156,8 @@
     <ClInclude Include="modelScene\GameObject.h" />
     <ClInclude Include="modelScene\GameObjectFactory.h" />
     <ClInclude Include="modelScene\graphicObject\GraphicObject.h" />
+    <ClInclude Include="modelScene\graphicObject\graphicObjectComponents\Material.h" />
+    <ClInclude Include="modelScene\graphicObject\graphicObjectComponents\PhongMaterialWithTexture.h" />
     <ClInclude Include="modelScene\graphicObject\graphicObjectComponents\Texture.h" />
     <ClInclude Include="modelScene\Light.h" />
     <ClInclude Include="modelScene\graphicObject\graphicObjectComponents\Mesh.h" />

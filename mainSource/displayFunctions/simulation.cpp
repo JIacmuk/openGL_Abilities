@@ -1,6 +1,5 @@
 #include "simulation.h"
 
-
 double getSimulationTime();
 void setWindowFPS();
 void StartCounter();
@@ -9,11 +8,23 @@ void cameraSimulation(float simulationTime);
 void gameObjectSimulation(float simulationTime);
 void movePlayer();
 void movePlayerWithLightBlock(MoveDirection direction, int playerPositionX, int playerPositionY);
-void monstersSimulation(float simTime);
-//Задаем переменные для работы со времем
+void monstersSimulation(float simTime); 
+void randomizeDirection(MoveDirection& direction);
+//Задаем переменные для работы со временем
 double PCFreq = 0.0;
 __int64 CounterStart = 0;
 double summ = 0;
+//создаем словарь со значениями передвижения
+map<MoveDirection, ivec2> moveDirectionToVector = {
+	{ MoveDirection::STOP,  ivec2(0,  0) },
+	{ MoveDirection::UP,    ivec2(0, -1) },
+	{ MoveDirection::LEFT,  ivec2(-1, 0) },
+	{ MoveDirection::DOWN,  ivec2(0 , 1) },
+	{ MoveDirection::RIGHT, ivec2(1,  0) }
+};
+// массив таймингов мобов 
+double monstersTimings[3] = {0, 0, 0};
+
 
 void simulation() {
 	float simTime = getSimulationTime();
@@ -25,8 +36,10 @@ void simulation() {
 	monstersSimulation(simTime);
 
 	setWindowFPS();
-
-	movePlayer();
+	if (player != nullptr) {
+		movePlayer();
+	}
+	
 	// устанавливаем признак того, что окно нуждается в перерисовке
 	glutPostRedisplay();
 };
@@ -67,44 +80,41 @@ int getFPS()
 	return (int)(1000 / simTime);
 }
 
-void movePlayer()
-{
-	// получаем позицию игрока
-	vec2 playerPosition = (*player).getPosition();
-	int playerPositionX = playerPosition[0];
-	int playerPositionY = playerPosition[1];
-	
-	// проверяем на возможность прохождения
-	if (GetAsyncKeyState('W'))
-	{	
-		if (passabilityMap[playerPositionX][playerPositionY - 1] == 0) (*player).move(MoveDirection::UP);
-		if (passabilityMap[playerPositionX][playerPositionY - 1] == 1 && passabilityMap[playerPositionX][playerPositionY - 2] == 0) {
-			movePlayerWithLightBlock(MoveDirection::UP, playerPositionX, playerPositionY);
+//функция запускает движения игрока 
+void movePlayer() {
+	MoveDirection direction = MoveDirection::STOP;
+	//получаем начальную позицию игрока 
+	int playerPositionX = (*player).getPosition()[0];
+	int playerPositionY = (*player).getPosition()[1];
+
+	if (GetAsyncKeyState('W')) direction = MoveDirection::UP;
+	if (GetAsyncKeyState('A')) direction = MoveDirection::LEFT;
+	if (GetAsyncKeyState('S')) direction = MoveDirection::DOWN;
+	if (GetAsyncKeyState('D')) direction = MoveDirection::RIGHT;
+	//Проверяем на возможность перемещения и записываем вектор изменения
+
+	if (!(*player).isMoving() && direction != MoveDirection::STOP) {
+		//находим координаты след клетки и клетки за ней
+		ivec2 nextPLayerLocation = ivec2(playerPositionX + moveDirectionToVector[direction].x,
+										 playerPositionY + moveDirectionToVector[direction].y);
+		ivec2 LocationAcrossPlayer = ivec2(playerPositionX + 2 * moveDirectionToVector[direction].x,
+										   playerPositionY + 2 * moveDirectionToVector[direction].y);
+
+		//находим типы этих клеток
+		int nextLocationType = passabilityMap[nextPLayerLocation.x][nextPLayerLocation.y];
+		int nextAcrossLocationType = passabilityMap[LocationAcrossPlayer.x][LocationAcrossPlayer.y];
+
+		//проверяем возможны ли дополнительные условия при передвижении
+		if (nextLocationType == 1 && nextAcrossLocationType == 0) {
+			movePlayerWithLightBlock(direction, playerPositionX, playerPositionY);
+			return;
 		}
-	}
-	if (GetAsyncKeyState('A'))
-	{
-		if (passabilityMap[playerPositionX - 1][playerPositionY] == 0)(*player).move(MoveDirection::LEFT);
-		if (passabilityMap[playerPositionX - 1][playerPositionY] == 1 && passabilityMap[playerPositionX - 2][playerPositionY] == 0) {
-			movePlayerWithLightBlock(MoveDirection::LEFT, playerPositionX, playerPositionY);
-		}
-	}
-	if (GetAsyncKeyState('S'))
-	{
-		if (passabilityMap[playerPositionX][playerPositionY + 1] == 0)(*player).move(MoveDirection::DOWN);
-		if (passabilityMap[playerPositionX][playerPositionY + 1] == 1 && passabilityMap[playerPositionX][playerPositionY + 2] == 0 ) {
-			movePlayerWithLightBlock(MoveDirection::DOWN, playerPositionX, playerPositionY);
-		}
-	}
-	if (GetAsyncKeyState('D'))
-	{
-		if (passabilityMap[playerPositionX + 1][playerPositionY] == 0)(*player).move(MoveDirection::RIGHT);
-		if (passabilityMap[playerPositionX + 1][playerPositionY] == 1 && passabilityMap[playerPositionX + 2][playerPositionY] == 0 ) {
-			movePlayerWithLightBlock(MoveDirection::RIGHT, playerPositionX, playerPositionY);
-		}
+		//проверка на базовое перемещение
+		if (nextLocationType == 0) (*player).move(direction);
 	}
 }
 
+//устаревшая функция, надо переписать ?
 void movePlayerWithLightBlock(MoveDirection direction, int playerPositionX, int playerPositionY) {
 
 	ivec2 nextPosition;
@@ -141,9 +151,70 @@ void movePlayerWithLightBlock(MoveDirection direction, int playerPositionX, int 
 	}
 }
 
+//функция для расчета движений монстров 
 void monstersSimulation(float simTime)
+{	
+	MoveDirection direction = MoveDirection::STOP;
+	//задаем изменение движения для каждого 
+	for (int i = 0; i < 3; i++) {
+		//просчитываем тайминги
+		monstersTimings[i] += simTime;
+		// ставим частоту изменения направления 
+		if (monstersTimings[i] > 100) {
+			monstersTimings[i] = 0;
+
+			//Проверяем не попал ли монстр в игрока 
+			if (player != nullptr) {
+				if ((*monsters[i]).getPosition() == (*player).getPosition()) {
+					//удаляем игрока
+					player.reset();
+				}
+			}
+			
+			//изменяем направление движения 
+			randomizeDirection(direction);
+
+			if (!(*monsters[i]).isMoving() && direction != MoveDirection::STOP) {
+				//находим координаты след клетки и клетки за ней
+				int monsterPositionX = (*monsters[i]).getPosition()[0];
+				int monsterPositionY = (*monsters[i]).getPosition()[1];
+				ivec2 nextMonsterLocation = ivec2(monsterPositionX + moveDirectionToVector[direction].x,
+					monsterPositionY + moveDirectionToVector[direction].y);
+				//находим типы этих клеток
+				int nextLocationType = passabilityMap[nextMonsterLocation.x][nextMonsterLocation.y];
+				//проверка на базовое перемещение
+				if (nextLocationType == 0) {
+					(*monsters[i]).move(direction);
+					//изменяем карту проходимости при движении монстров
+					passabilityMap[monsterPositionX][monsterPositionY] = 0;
+					passabilityMap[nextMonsterLocation.x][nextMonsterLocation.y] = 3;
+				}
+					
+			}
+		}
+	}
+}
+
+void randomizeDirection(MoveDirection& direction)
 {
-		
+	int randomNum = rand() % 5; // генерируем случайное число от 0 до 4
+	switch (randomNum) {
+	case 0:
+		direction = MoveDirection::STOP;
+		break;
+	case 1:
+		direction = MoveDirection::LEFT;
+		break;
+	case 2:
+		direction = MoveDirection::RIGHT;
+		break;
+	case 3:
+		direction = MoveDirection::UP;
+		break;
+	case 4:
+		direction = MoveDirection::DOWN;
+		break;
+	}
 }
 
 void cameraSimulation(float simulationTime) {
@@ -178,8 +249,9 @@ void cameraSimulation(float simulationTime) {
 }
 
 void gameObjectSimulation(float simulationTime)
-{
-	(*player).simulate(simulationTime);
+{	
+	if(player != nullptr) (*player).simulate(simulationTime);
+	for (int i = 0; i < 3; i++) (*monsters[i]).simulate(simulationTime);
 	for (int i = 0; i < 21; i++) {
 		for (int j = 0; j < 21; j++) {
 			if (passabilityMap[i][j] == 1) (*mapObjects[i][j]).simulate(simulationTime);

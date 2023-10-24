@@ -27,7 +27,7 @@
 
 //ѕодключаем stl утилиты
 #include <vector>
-
+#include <map>
 // используем пространство имен стандартной библиотеки
 using namespace std;
 using namespace glm;
