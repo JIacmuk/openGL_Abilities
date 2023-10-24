@@ -9,6 +9,7 @@ void cameraSimulation(float simulationTime);
 void gameObjectSimulation(float simulationTime);
 void movePlayer();
 void movePlayerWithLightBlock(MoveDirection direction, int playerPositionX, int playerPositionY);
+void monstersSimulation(float simTime);
 //«адаем переменные дл€ работы со времем
 double PCFreq = 0.0;
 __int64 CounterStart = 0;
@@ -16,9 +17,12 @@ double summ = 0;
 
 void simulation() {
 	float simTime = getSimulationTime();
+	//симул€ци€ камеры
 	cameraSimulation(simTime);
+	//симул€ци€ всех игровых объектов ( их плавное перемещение )
 	gameObjectSimulation(simTime);
-
+	//симул€ци€ монстров
+	monstersSimulation(simTime);
 
 	setWindowFPS();
 
@@ -135,6 +139,11 @@ void movePlayerWithLightBlock(MoveDirection direction, int playerPositionX, int 
 		mapObjects[playerPositionX + nextDoublePosition[0]][playerPositionY + nextDoublePosition[1]] = mapObjects[playerPositionX + nextPosition[0]][playerPositionY + nextPosition[1]];
 		mapObjects[playerPositionX + nextPosition[0]][playerPositionY + nextPosition[1]] = nullptr;
 	}
+}
+
+void monstersSimulation(float simTime)
+{
+		
 }
 
 void cameraSimulation(float simulationTime) {

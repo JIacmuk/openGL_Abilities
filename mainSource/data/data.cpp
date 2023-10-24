@@ -6,6 +6,7 @@ GameObjectFactory gameObjectFactory;
 shared_ptr<GameObject> mapObjects[21][21];
 shared_ptr<GameObject> field;
 shared_ptr<GameObject> player;
+shared_ptr<GameObject> monsters[3];
 // текстура поля
 Texture planeTexture;
 // используемая камера
@@ -47,11 +48,11 @@ int passabilityMap[21][21] = {
 3,0,0,0,0,0,0,0,0,0,0,0,2,0,2,0,0,0,0,0,3,
 3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3
 };
+//местоположение врагов 
+vec2 monsterLocation[3]{ vec2(5, 3), vec2(19, 5), vec2(19, 18) };
 
 void initData() 
 {
-	//Загружаем текстуру для одного объекта
-	
 	planeTexture.load(pathToTexture);
 	//Загрузка фабрики
 	gameObjectFactory.init(pathToGameObjects);
@@ -59,6 +60,12 @@ void initData()
 	field = gameObjectFactory.create(GameObjectType::FIELD, 10, 10, -0.5);
 	//Создаем игрока
 	player = gameObjectFactory.create(GameObjectType::PLAYER, 1, 19);
+	//Создаем монстров
+	for (int i = 0; i < 3; i++) {
+		monsters[i] = gameObjectFactory.create(GameObjectType::MONSTER, monsterLocation[i].x, monsterLocation[i].y);
+	}
+
+
 	// инициализация объектов сцены
 	for (int i = 0; i < 21; i++) {
 		for (int j = 0; j < 21; j++) {
@@ -85,7 +92,7 @@ void initData()
 	speedZoom = 5;
 
 	//источник света
-	light.setDiffuse(vec4(0.9, 0.9, 0.9, 1)); // цвет
-	light.setAmbient(vec4(0.1, 0.1, 0.1, 1)); // отражение лучей от других объектов (затемнение)
+	light.setDiffuse(vec4(0.5, 0.5, 0.5, 1)); // цвет
+	light.setAmbient(vec4(0.2, 0.2, 0.2, 1)); // отражение лучей от других объектов (затемнение)
 	light.setSpecular(vec4(0.5, 0.5, 0.5, 1)); // блики? но я чет разницы не вижу
 }

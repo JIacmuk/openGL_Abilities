@@ -18,6 +18,8 @@ GraphicObject::GraphicObject()
 void GraphicObject::setPosition(vec3 position)
 {
 	this->position = position;
+	//по новой расчитываем матрицу 
+	recalculateModelMatrix();
 }
 
 vec3 GraphicObject::getPosition()
@@ -27,7 +29,8 @@ vec3 GraphicObject::getPosition()
 
 void GraphicObject::setAngle(float grad)
 {
-	this->angle = grad / 180 * 3.1415;
+	this->angle = grad / 180 * 3.1415;//по новой расчитываем матрицу 
+	recalculateModelMatrix();
 }
 
 float GraphicObject::getAngle()
@@ -56,8 +59,7 @@ void GraphicObject::setMesh(shared_ptr<Mesh> mesh)
 
 void GraphicObject::draw()
 {
-	//по новой расчитываем матрицу 
-	recalculateModelMatrix();
+	
 
 	//заполняем стек моделей
 	glColor3f(color.r, color.g, color.b);

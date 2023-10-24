@@ -19,9 +19,15 @@ void display(void)
 
 	// устанавливаем камеру по заданным параметрам
 	camera.apply();
-	
+	// рисуем игрока
 	(*player).draw();
+	// рисуем монстров
+	for (int i = 0; i < 3; i++) {
+		if (monsters[i] != nullptr) (*monsters[i]).draw();
+	}
+	// рисуем поле
 	drawField();
+
 	for (int i = 0; i < 21; i++) {
 		for (int j = 0; j < 21; j++) {
 			if(mapObjects[i][j] != nullptr) (*mapObjects[i][j]).draw();
