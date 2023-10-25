@@ -25,6 +25,10 @@ void display(void)
 	for (int i = 0; i < 3; i++) {
 		if (monsters[i] != nullptr) (*monsters[i]).draw();
 	}
+	// рисуем бомбу 
+	if (bomb != nullptr) {
+		(*bomb).draw();
+	}
 	// рисуем поле
 	//drawField();
 	(*field).draw();

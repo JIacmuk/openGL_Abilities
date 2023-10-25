@@ -2,11 +2,14 @@
 #include "../modelScene/Camera.h"
 #include "../modelScene/GameObjectFactory.h"
 #include "../modelScene/Light.h"
+
+extern GameObjectFactory gameObjectFactory;
 //матрица игровых объектов
 extern shared_ptr<GameObject> mapObjects[21][21];
 extern shared_ptr<GameObject> field;
 extern shared_ptr<GameObject> player;
 extern shared_ptr<GameObject> monsters[3];
+extern shared_ptr<GameObject> bomb;
 //камера 
 extern Camera camera;
 

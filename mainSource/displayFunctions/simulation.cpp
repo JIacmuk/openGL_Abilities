@@ -10,6 +10,7 @@ void movePlayer();
 void movePlayerWithLightBlock(MoveDirection direction, int playerPositionX, int playerPositionY);
 void monstersSimulation(float simTime); 
 void randomizeDirection(MoveDirection& direction);
+void bombSimulation(float simTime);
 //Задаем переменные для работы со временем
 double PCFreq = 0.0;
 __int64 CounterStart = 0;
@@ -24,6 +25,8 @@ map<MoveDirection, ivec2> moveDirectionToVector = {
 };
 // массив таймингов мобов 
 double monstersTimings[3] = {0, 0, 0};
+// тайминг мобов 
+double bombTimer = 0;
 
 
 void simulation() {
@@ -34,12 +37,14 @@ void simulation() {
 	gameObjectSimulation(simTime);
 	//симуляция монстров
 	monstersSimulation(simTime);
-
+	//симуляция бомбы 
+	bombSimulation(simTime);
 	setWindowFPS();
+
 	if (player != nullptr) {
 		movePlayer();
 	}
-	
+
 	// устанавливаем признак того, что окно нуждается в перерисовке
 	glutPostRedisplay();
 };
@@ -91,6 +96,11 @@ void movePlayer() {
 	if (GetAsyncKeyState('A')) direction = MoveDirection::LEFT;
 	if (GetAsyncKeyState('S')) direction = MoveDirection::DOWN;
 	if (GetAsyncKeyState('D')) direction = MoveDirection::RIGHT;
+
+	//Проверяем возможность поставить бомбу 
+	if (!(*player).isMoving() && GetAsyncKeyState(0x20) && bomb == nullptr) {
+		bomb = gameObjectFactory.create(GameObjectType::BOMB, playerPositionX, playerPositionY);
+	}
 	//Проверяем на возможность перемещения и записываем вектор изменения
 
 	if (!(*player).isMoving() && direction != MoveDirection::STOP) {
@@ -111,6 +121,17 @@ void movePlayer() {
 		}
 		//проверка на базовое перемещение
 		if (nextLocationType == 0) (*player).move(direction);
+	}
+}
+
+//функция взрыва бомбы 
+void bombSimulation(float simTime) {
+	if (bomb != nullptr) {
+		bombTimer += simTime;
+		if (bombTimer > 3000) {
+			bombTimer = 0;
+
+		}
 	}
 }
 

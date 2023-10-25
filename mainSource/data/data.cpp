@@ -7,6 +7,7 @@ shared_ptr<GameObject> mapObjects[21][21];
 shared_ptr<GameObject> field;
 shared_ptr<GameObject> player;
 shared_ptr<GameObject> monsters[3];
+shared_ptr<GameObject> bomb;
 // используемая камера
 Camera camera(0, -50, -30);
 // используем свет
@@ -57,6 +58,8 @@ void initData()
 	field = gameObjectFactory.create(GameObjectType::FIELD, 10, 10, -0.5);
 	//Создаем игрока
 	player = gameObjectFactory.create(GameObjectType::PLAYER, 1, 19);
+	//Создаем бомбу 
+	bomb = nullptr;
 	//Создаем монстров
 	for (int i = 0; i < 3; i++) {
 		monsters[i] = gameObjectFactory.create(GameObjectType::MONSTER, monsterLocation[i].x, monsterLocation[i].y);
