@@ -1,7 +1,8 @@
 #pragma once
 #include "../modelScene/Camera.h"
-#include "../modelScene/GameObjectFactory.h"
+#include "../modelScene/gameObjectTools/GameObjectFactory.h"
 #include "../modelScene/Light.h"
+#include "../modelScene/Decal.h"
 
 extern GameObjectFactory gameObjectFactory;
 //матрица игровых объектов
@@ -22,7 +23,9 @@ extern int passabilityMap[21][21];
 // 0 - пустое место
 // 1 - легкий объект, который может перемещать игрок, но не могут монстры
 // 2 - т€желый объект
-// 3 - монстр
+// 4 - монстр
+// 5 - бомба 
+
 //врем€ симул€ции одного кадра
 extern double simTime;
 
@@ -30,6 +33,9 @@ extern double simTime;
 extern double speedHorizontal; // град / c 
 extern double speedVertical;
 extern double speedZoom;
+
+// декали
+extern vector<Decal> decals;
 
 //функци€ дл€ инициализации
 void initData();

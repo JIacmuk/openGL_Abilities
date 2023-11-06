@@ -100,6 +100,7 @@ void movePlayer() {
 	//Проверяем возможность поставить бомбу 
 	if (!(*player).isMoving() && GetAsyncKeyState(0x20) && bomb == nullptr) {
 		bomb = gameObjectFactory.create(GameObjectType::BOMB, playerPositionX, playerPositionY);
+		passabilityMap[playerPositionX][playerPositionY] = 5;
 	}
 	//Проверяем на возможность перемещения и записываем вектор изменения
 
@@ -129,8 +130,57 @@ void bombSimulation(float simTime) {
 	if (bomb != nullptr) {
 		bombTimer += simTime;
 		if (bombTimer > 3000) {
+			//сбрасываем таймер
 			bombTimer = 0;
+			ivec2 bombPosition = (*bomb).getPosition();
+			passabilityMap[bombPosition.x][bombPosition.y] = 0;
+			// реализация взрыва 
+			// создаем массив направлений для реализации 
+			MoveDirection directions[4] = { MoveDirection::UP, MoveDirection::RIGHT, MoveDirection::DOWN, MoveDirection::LEFT};
+			// проходимся в каждом из направлений
+			for (MoveDirection direction : directions) {
+				//вычисляем следующие позиции
+				ivec2 nextPosition = moveDirectionToVector[direction];
+				// получаем координаты
+				ivec2 nextLocation = bombPosition + nextPosition;
+				int typeId;
+				//проверка на для элементов взрыва
+				//легкий блок или монстр 
+				
+				for (int i = 0; i < 2; i++) {
+					typeId = passabilityMap[nextLocation.x][nextLocation.y];
+					if (typeId == 2 || typeId == 3) break;
+					//eсли игрок
+					if (player != nullptr) {
+						if ((*player).getPosition() == nextLocation) {
+							player.reset();
+							break;
+						}
+					}
+					//если монстр
+					if (typeId == 4) {
+						//прохожусь по монстрам
+						for (auto& monster : monsters) {
+							if ((*monster).getPosition() == nextLocation) monster = nullptr;
+						}
+						passabilityMap[nextLocation.x][nextLocation.y] = 0;
+						break;
+					}
+					if (typeId == 1) {
+						mapObjects[nextLocation.x][nextLocation.y] = nullptr;
+						passabilityMap[nextLocation.x][nextLocation.y] = 0;
+						break;
+					}
+					nextLocation += nextPosition;
+				}
+			}
 
+			//убираем бомбу
+			passabilityMap[bombPosition.x][bombPosition.y] = 0;
+			bomb = nullptr;
+			//создаем отметку взрыва 
+			Decal tempDecal(bombPosition);
+			decals.push_back(tempDecal);
 		}
 	}
 }
@@ -138,30 +188,12 @@ void bombSimulation(float simTime) {
 //устаревшая функция, надо переписать ?
 void movePlayerWithLightBlock(MoveDirection direction, int playerPositionX, int playerPositionY) {
 
-	ivec2 nextPosition;
-	switch (direction)
-	{
-	case MoveDirection::STOP:
-		nextPosition = ivec2(0, 0);
-		break;
-	case MoveDirection::LEFT:
-		nextPosition = ivec2(-1, 0);
-		break;
-	case MoveDirection::RIGHT:
-		nextPosition = ivec2(1, 0);
-		break;
-	case MoveDirection::UP:
-		nextPosition = ivec2(0, -1);
-		break;
-	case MoveDirection::DOWN:
-		nextPosition = ivec2(0, 1);
-		break;
-	}
+	ivec2 nextPosition = moveDirectionToVector[direction];
 	ivec2 nextDoublePosition = nextPosition * 2;
 
 	(*player).move(direction);
 	(*mapObjects[playerPositionX + nextPosition[0]][playerPositionY + nextPosition[1]]).move(direction);
-
+		
 	if ((*mapObjects[playerPositionX + nextPosition[0]][playerPositionY + nextPosition[1]]).isMoving() == false) {
 		//изменяем карту проходимости 
 		passabilityMap[playerPositionX + nextPosition[0]][playerPositionY + nextPosition[1]] = 0;
@@ -208,9 +240,8 @@ void monstersSimulation(float simTime)
 					(*monsters[i]).move(direction);
 					//изменяем карту проходимости при движении монстров
 					passabilityMap[monsterPositionX][monsterPositionY] = 0;
-					passabilityMap[nextMonsterLocation.x][nextMonsterLocation.y] = 3;
-				}
-					
+					passabilityMap[nextMonsterLocation.x][nextMonsterLocation.y] = 4;
+				}	
 			}
 		}
 	}

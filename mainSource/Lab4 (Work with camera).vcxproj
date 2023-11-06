@@ -138,8 +138,9 @@
     <ClCompile Include="displayFunctions\simulation.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="modelScene\Camera.cpp" />
+    <ClCompile Include="modelScene\Decal.cpp" />
     <ClCompile Include="modelScene\GameObject.cpp" />
-    <ClCompile Include="modelScene\GameObjectFactory.cpp" />
+    <ClCompile Include="modelScene\gameObjectTools\GameObjectFactory.cpp" />
     <ClCompile Include="modelScene\graphicObject\GraphicObject.cpp" />
     <ClCompile Include="modelScene\graphicObject\graphicObjectComponents\PhongMaterialWithTexture.cpp" />
     <ClCompile Include="modelScene\graphicObject\graphicObjectComponents\Texture.cpp" />
@@ -153,8 +154,9 @@
     <ClInclude Include="displayFunctions\simulation.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="modelScene\Camera.h" />
+    <ClInclude Include="modelScene\Decal.h" />
     <ClInclude Include="modelScene\GameObject.h" />
-    <ClInclude Include="modelScene\GameObjectFactory.h" />
+    <ClInclude Include="modelScene\gameObjectTools\GameObjectFactory.h" />
     <ClInclude Include="modelScene\graphicObject\GraphicObject.h" />
     <ClInclude Include="modelScene\graphicObject\graphicObjectComponents\Material.h" />
     <ClInclude Include="modelScene\graphicObject\graphicObjectComponents\PhongMaterialWithTexture.h" />

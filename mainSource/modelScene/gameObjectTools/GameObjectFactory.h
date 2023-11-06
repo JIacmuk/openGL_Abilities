@@ -1,18 +1,7 @@
 #pragma once
-#include "../Header.h"
-#include "GameObject.h"
+#include "../../Header.h"
+#include "../GameObject.h"
 #include "map"
-
-// Класс для определения типа игрового объекта
-enum class GameObjectType {
-	FIELD, // игровое поле
-	LIGHT_OBJECT, // легкий игровой объект
-	HEAVY_OBJECT, // тяжелый игровой объект
-	BORDER_OBJECT, // граничный игровой объект
-	PLAYER, // игровой объект для представления игрока
-	BOMB, // игровой объект для представления бомбы
-	MONSTER // игровой объект для представления монстров
-};
 
 
 // КЛАСС ДЛЯ СОЗДАНИЯ ИГРОВЫХ ОБЪЕКТОВ

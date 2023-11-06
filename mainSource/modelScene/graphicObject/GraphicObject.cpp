@@ -3,15 +3,15 @@
 GraphicObject::GraphicObject()
 {
 
-	this->modelMatrix = new GLfloat[16]{
+	modelMatrix = new GLfloat[16]{
 		1.0, 0.0, 0.0, 0.0, // ось Ox
 		0.0, 1.0, 0.0, 0.0, // ось Oy
 		0.0, 0.0, 1.0, 0.0, // ось Oz
 		0.0, 0.0, 0.0, 1.0  // позиция объекта (начало системы координат)
 	};
 
-	this->color = vec3(1, 0, 0);
-	this->angle = 0;
+	color = vec3(1, 0, 0);
+	angle = 0;
 }
 
 
