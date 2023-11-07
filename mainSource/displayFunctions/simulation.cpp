@@ -45,6 +45,11 @@ void simulation() {
 		movePlayer();
 	}
 
+	//// устанавливаем ортографическую матрицу проекции
+	//glMatrixMode(GL_PROJECTION);
+	//glLoadIdentity();
+	//gluOrtho2D(0.0, 1.0, 0.0, 1.0);
+
 	// устанавливаем признак того, что окно нуждается в перерисовке
 	glutPostRedisplay();
 };

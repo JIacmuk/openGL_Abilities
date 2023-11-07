@@ -8,9 +8,8 @@ void GameObjectFactory::init(string filename)
 {
 	using json = nlohmann::json;
 	ifstream f(filename);
-	if (!f.is_open()) {
-		cout << "Ошибка открытия файла Игровых Объектов!" << endl;
-	}
+	if (!f.is_open()) { cout << "Ошибка открытия файла Игровых Объектов!" << endl; }
+	//Загружаем файл
 	json data = json::parse(f);
 
 	string pathToMaterial = data["pathToMaterials"];
@@ -18,6 +17,7 @@ void GameObjectFactory::init(string filename)
 	string pathToTextures = data["pathToTextures"];
 
 	for (auto &it : data["objects"].items()) {
+
 		string valueMesh = data["objects"][it.key()]["mesh"];
 		shared_ptr<Mesh> tempMesh(new Mesh(pathToMesh + valueMesh + ".obj"));
 		meshes.push_back(tempMesh);

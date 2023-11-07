@@ -49,6 +49,8 @@ int passabilityMap[21][21] = {
 ivec2 monsterLocation[3]{ ivec2(5, 3), ivec2(19, 5), ivec2(19, 18) };
 // декали
 vector<Decal> decals;
+// спрайты
+vector<Sprite> sprites;
 
 void initData() 
 {	
@@ -87,6 +89,12 @@ void initData()
 
 	//Загрузка декалей
 	Decal::init();
+	//Загрузка спрайтов
+	Sprite::init();
+	//Вывод спрайта бомбы
+	Sprite bombSprite;
+	bombSprite.setTexture(make_shared<Texture>("../AdditionalData/sprites/Bomb.ico"));
+	sprites.push_back(bombSprite);
 	//Максимальная скорость
 	speedHorizontal = 90;
 	speedVertical = 45;

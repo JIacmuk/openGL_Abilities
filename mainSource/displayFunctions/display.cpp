@@ -14,6 +14,15 @@ void display(void)
 	// включаем тест глубины
 	glEnable(GL_DEPTH_TEST);
 
+	// включаем отсечение нелецевых граней
+	glEnable(GL_CULL_FACE);
+
+	// включаем режим расчета освещения
+	glEnable(GL_LIGHTING);
+
+	// отключаем режим цветового наложения
+	glDisable(GL_BLEND);
+
 	// устанавливаем освещение по заданным параметрам
 	light.apply();
 
@@ -37,9 +46,11 @@ void display(void)
 			if(mapObjects[i][j] != nullptr) (*mapObjects[i][j]).draw();
 		}
 	}
-	
+	// Выводим декали
 	for (Decal item : decals) item.draw();
-	
+	// Выводим спрайты
+	for (Sprite item : sprites) item.draw(0,0,0,0);
+
 	// смена переднего и заднего буферов
 	glutSwapBuffers();
 };

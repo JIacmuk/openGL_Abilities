@@ -147,6 +147,7 @@
     <ClCompile Include="modelScene\Light.cpp" />
     <ClCompile Include="modelScene\graphicObject\graphicObjectComponents\Mesh.cpp" />
     <ClCompile Include="modelScene\graphicObject\graphicObjectComponents\PhongMaterial.cpp" />
+    <ClCompile Include="modelScene\Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="data\data.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="modelScene\Light.h" />
     <ClInclude Include="modelScene\graphicObject\graphicObjectComponents\Mesh.h" />
     <ClInclude Include="modelScene\graphicObject\graphicObjectComponents\PhongMaterial.h" />
+    <ClInclude Include="modelScene\Sprite.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\AdditionalData\gameObjectType.json" />

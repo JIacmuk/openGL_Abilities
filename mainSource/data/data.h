@@ -3,6 +3,7 @@
 #include "../modelScene/gameObjectTools/GameObjectFactory.h"
 #include "../modelScene/Light.h"
 #include "../modelScene/Decal.h"
+#include "../modelScene/Sprite.h"
 
 extern GameObjectFactory gameObjectFactory;
 //матрица игровых объектов
@@ -36,6 +37,10 @@ extern double speedZoom;
 
 // декали
 extern vector<Decal> decals;
+
+// спрайты
+extern vector<Sprite> sprites;
+
 
 //функция для инициализации
 void initData();
