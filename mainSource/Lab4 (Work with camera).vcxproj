@@ -76,13 +76,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\glm;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\freeglut\include\GL;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\jsonParser;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\glew-2.1.0\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\glm;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\freeglut\include\GL;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\jsonParser;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\glew-2.1.0\include\GL;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\DevIL Windows SDK\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\freeglut\lib\x64;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\glew-2.1.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;freeglut.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\freeglut\lib\x64;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\glew-2.1.0\lib\Release\x64;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\DevIL Windows SDK\lib\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;freeglut.lib;glew32.lib;DevIL.lib;ILU.lib;ILUT.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -107,13 +107,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\glm;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\freeglut\include\GL;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\jsonParser;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\glew-2.1.0\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\glm;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\freeglut\include\GL;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\jsonParser;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\glew-2.1.0\include\GL;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\DevIL Windows SDK\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\freeglut\lib\x64;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\glew-2.1.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;freeglut.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\freeglut\lib\x64;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\glew-2.1.0\lib\Release\x64;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\DevIL Windows SDK\lib\x64\unicode\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;freeglut.lib;glew32.lib;DevIL.lib;ILU.lib;ILUT.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -138,12 +138,16 @@
     <ClCompile Include="displayFunctions\simulation.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="modelScene\Camera.cpp" />
+    <ClCompile Include="modelScene\Decal.cpp" />
     <ClCompile Include="modelScene\GameObject.cpp" />
-    <ClCompile Include="modelScene\GameObjectFactory.cpp" />
+    <ClCompile Include="modelScene\gameObjectTools\GameObjectFactory.cpp" />
     <ClCompile Include="modelScene\graphicObject\GraphicObject.cpp" />
+    <ClCompile Include="modelScene\graphicObject\graphicObjectComponents\PhongMaterialWithTexture.cpp" />
+    <ClCompile Include="modelScene\graphicObject\graphicObjectComponents\Texture.cpp" />
     <ClCompile Include="modelScene\Light.cpp" />
     <ClCompile Include="modelScene\graphicObject\graphicObjectComponents\Mesh.cpp" />
     <ClCompile Include="modelScene\graphicObject\graphicObjectComponents\PhongMaterial.cpp" />
+    <ClCompile Include="modelScene\Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="data\data.h" />
@@ -151,12 +155,17 @@
     <ClInclude Include="displayFunctions\simulation.h" />
     <ClInclude Include="Header.h" />
     <ClInclude Include="modelScene\Camera.h" />
+    <ClInclude Include="modelScene\Decal.h" />
     <ClInclude Include="modelScene\GameObject.h" />
-    <ClInclude Include="modelScene\GameObjectFactory.h" />
+    <ClInclude Include="modelScene\gameObjectTools\GameObjectFactory.h" />
     <ClInclude Include="modelScene\graphicObject\GraphicObject.h" />
+    <ClInclude Include="modelScene\graphicObject\graphicObjectComponents\Material.h" />
+    <ClInclude Include="modelScene\graphicObject\graphicObjectComponents\PhongMaterialWithTexture.h" />
+    <ClInclude Include="modelScene\graphicObject\graphicObjectComponents\Texture.h" />
     <ClInclude Include="modelScene\Light.h" />
     <ClInclude Include="modelScene\graphicObject\graphicObjectComponents\Mesh.h" />
     <ClInclude Include="modelScene\graphicObject\graphicObjectComponents\PhongMaterial.h" />
+    <ClInclude Include="modelScene\Sprite.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\AdditionalData\gameObjectType.json" />

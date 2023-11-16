@@ -1,11 +1,17 @@
 #pragma once
 #include "../modelScene/Camera.h"
-#include "../modelScene/GameObjectFactory.h"
+#include "../modelScene/gameObjectTools/GameObjectFactory.h"
 #include "../modelScene/Light.h"
+#include "../modelScene/Decal.h"
+#include "../modelScene/Sprite.h"
+
+extern GameObjectFactory gameObjectFactory;
 //матрица игровых объектов
 extern shared_ptr<GameObject> mapObjects[21][21];
 extern shared_ptr<GameObject> field;
 extern shared_ptr<GameObject> player;
+extern shared_ptr<GameObject> monsters[3];
+extern shared_ptr<GameObject> bomb;
 //камера 
 extern Camera camera;
 
@@ -14,6 +20,12 @@ extern Light light;
 
 //карта проходимости
 extern int passabilityMap[21][21];
+//описание карты проходимости
+// 0 - пустое место
+// 1 - легкий объект, который может перемещать игрок, но не могут монстры
+// 2 - т€желый объект
+// 4 - монстр
+// 5 - бомба 
 
 //врем€ симул€ции одного кадра
 extern double simTime;
@@ -22,6 +34,13 @@ extern double simTime;
 extern double speedHorizontal; // град / c 
 extern double speedVertical;
 extern double speedZoom;
+
+// декали
+extern vector<Decal> decals;
+
+// спрайты
+extern vector<Sprite> sprites;
+
 
 //функци€ дл€ инициализации
 void initData();

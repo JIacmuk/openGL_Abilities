@@ -37,6 +37,8 @@ void Light::setSpecular(vec4 color)
 
 void Light::apply(GLenum LightNumber)
 {	
+	// включаем первый источник света
+	glEnable(LightNumber);
 	// направленный источник света
 	glLightfv(LightNumber, GL_AMBIENT, value_ptr(ambient));
 	glLightfv(LightNumber, GL_DIFFUSE, value_ptr(diffuse));

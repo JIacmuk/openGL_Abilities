@@ -2,6 +2,19 @@
 #include "../Header.h"
 #include "graphicObject/GraphicObject.h"
 
+
+// Класс для определения типа игрового объекта
+enum class GameObjectType {
+	FIELD, // игровое поле
+	LIGHT_OBJECT, // легкий игровой объект
+	HEAVY_OBJECT, // тяжелый игровой объект
+	BORDER_OBJECT, // граничный игровой объект
+	PLAYER, // игровой объект для представления игрока
+	BOMB, // игровой объект для представления бомбы
+	MONSTER // игровой объект для представления монстров
+};
+
+
 // класс-перечисление для указания направления перемещения
 enum class MoveDirection { STOP, LEFT, RIGHT, UP, DOWN };
 

@@ -2,23 +2,26 @@
 
 //фабрика для создания игровых объектов
 GameObjectFactory gameObjectFactory;
+
 // список игровых объектов 
 shared_ptr<GameObject> mapObjects[21][21];
 shared_ptr<GameObject> field;
 shared_ptr<GameObject> player;
+shared_ptr<GameObject> monsters[3];
+shared_ptr<GameObject> bomb;
 // используемая камера
 Camera camera(0, -50, -30);
 // используем свет
 Light light(20, 25, 15);
-//время симуляции
+// время симуляции
 double simTime;
-//данные скорости
+// данные скорости
 double speedHorizontal;
 double speedVertical;
 double speedZoom;
-//Путь к папке с игровыми объектами
+// Путь к папке с игровыми объектами
 string pathToGameObjects = "../AdditionalData/GameObjectType.json";
-//карта проходимости для теста игрового движка 
+// карта проходимости для теста игрового движка 
 int passabilityMap[21][21] = {
 3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
 3,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,2,0,0,0,3,
@@ -42,16 +45,28 @@ int passabilityMap[21][21] = {
 3,0,0,0,0,0,0,0,0,0,0,0,2,0,2,0,0,0,0,0,3,
 3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3
 };
+// местоположение врагов 
+ivec2 monsterLocation[3]{ ivec2(5, 3), ivec2(19, 5), ivec2(19, 18) };
+// декали
+vector<Decal> decals;
+// спрайты
+vector<Sprite> sprites;
 
 void initData() 
-{
-
+{	
 	//Загрузка фабрики
 	gameObjectFactory.init(pathToGameObjects);
 	//Создаем поле
 	field = gameObjectFactory.create(GameObjectType::FIELD, 10, 10, -0.5);
 	//Создаем игрока
 	player = gameObjectFactory.create(GameObjectType::PLAYER, 1, 19);
+	//Создаем бомбу 
+	bomb = nullptr;
+	//Создаем монстров
+	for (int i = 0; i < 3; i++) {
+		monsters[i] = gameObjectFactory.create(GameObjectType::MONSTER, monsterLocation[i].x, monsterLocation[i].y);
+	}
+	
 	// инициализация объектов сцены
 	for (int i = 0; i < 21; i++) {
 		for (int j = 0; j < 21; j++) {
@@ -72,14 +87,26 @@ void initData()
 		}
 	}
 
+	//Загрузка декалей
+	Decal::init();
+	//Загрузка спрайтов
+	Sprite::init();
+	//Вывод спрайта бомбы
+	Sprite bombSprite;
+	bombSprite.setTexture(make_shared<Texture>("../AdditionalData/sprites/Bomb.ico"));
+	sprites.push_back(bombSprite);
 	//Максимальная скорость
 	speedHorizontal = 90;
 	speedVertical = 45;
-	speedZoom = 5;
+	speedZoom = 15;
 
 	//источник света
-	light.setDiffuse(vec4(0.9, 0.9, 0.9, 1)); // цвет
-	light.setAmbient(vec4(0.1, 0.1, 0.1, 1)); // отражение лучей от других объектов (затемнение)
+	light.setDiffuse(vec4(0.5, 0.5, 0.5, 1)); // цвет
+	light.setAmbient(vec4(0.2, 0.2, 0.2, 1)); // отражение лучей от других объектов (затемнение)
 	light.setSpecular(vec4(0.5, 0.5, 0.5, 1)); // блики? но я чет разницы не вижу
 
+	//заполняем карту проходимости монстрами
+	for (int i = 0; i < 3; i++) {
+		passabilityMap[monsterLocation[i].x][monsterLocation[i].y] = 3;
+	}
 }

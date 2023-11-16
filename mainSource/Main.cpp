@@ -13,6 +13,11 @@ int main(int argc, char** argv)
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_MULTISAMPLE);
 	
 
+	// инициализация библиотеки DevIL для загрузки изображений
+	ilInit();
+	iluInit();
+	ilutInit();
+
 	// СОЗДАНИЕ ОКНА:
 	// 1. устанавливаем верхний левый угол окна
 	glutInitWindowPosition(250, 10);
@@ -30,13 +35,6 @@ int main(int argc, char** argv)
 	// устанавливаем общую фоновую освещенность
 	GLfloat globalAmbientColor[] = { 0.2, 0.2, 0.2, 1.0 };
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalAmbientColor);
-
-
-	// включаем режим расчета освещения
-	glEnable(GL_LIGHTING);
-	// включаем первый источник света
-	glEnable(GL_LIGHT0);
-
 
 	// УСТАНОВКА ФУНКЦИЙ ОБРАТНОГО ВЫЗОВА
 	// устанавливаем функцию, которая будет вызываться для перерисовки окна

@@ -86,4 +86,6 @@ void GameObject::simulate(float sec)
 void GameObject::draw(void)
 {
 	graphicObject.draw();
+	//отключаем текстурирование 
+	Texture::disableAll();
 }

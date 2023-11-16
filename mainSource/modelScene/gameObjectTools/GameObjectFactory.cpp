@@ -8,22 +8,37 @@ void GameObjectFactory::init(string filename)
 {
 	using json = nlohmann::json;
 	ifstream f(filename);
-	if (!f.is_open()) {
-		cout << "Ошибка открытия файла Игровых Объектов!" << endl;
-	}
+	if (!f.is_open()) { cout << "Ошибка открытия файла Игровых Объектов!" << endl; }
+	//Загружаем файл
 	json data = json::parse(f);
 
 	string pathToMaterial = data["pathToMaterials"];
 	string pathToMesh = data["pathToMesh"];
+	string pathToTextures = data["pathToTextures"];
 
 	for (auto &it : data["objects"].items()) {
-		
+
 		string valueMesh = data["objects"][it.key()]["mesh"];
-		int valueMaterial = data["objects"][it.key()]["material"];
 		shared_ptr<Mesh> tempMesh(new Mesh(pathToMesh + valueMesh + ".obj"));
 		meshes.push_back(tempMesh);
-		shared_ptr<PhongMaterial> tempPhongMaterial(new PhongMaterial(pathToMaterial, valueMaterial - 1));
-		materials.push_back(tempPhongMaterial);
+
+		int valueMaterial = data["objects"][it.key()]["material"];
+		// Проверяем есть ли текстура у игрового объекта
+		if (data["objects"][it.key()].contains("texture")) {
+			//если есть закгружаем текстурки
+			string valueTextures = data["objects"][it.key()]["texture"];
+			//создаем материал
+			shared_ptr<PhongMaterialWithTexture> tempPhongMaterialWithTexture(new PhongMaterialWithTexture(pathToMaterial, valueMaterial - 1));
+			//создаем текстуру
+			shared_ptr <Texture> tempTexture(new Texture(pathToTextures + valueTextures));
+			(*tempPhongMaterialWithTexture).setTexture(tempTexture);
+			materials.push_back(tempPhongMaterialWithTexture);
+		}
+		else {
+			//если нет текстурок, то загружаем материал в обычном режиме
+			shared_ptr<PhongMaterial> tempPhongMaterial(new PhongMaterial(pathToMaterial, valueMaterial - 1));
+			materials.push_back(tempPhongMaterial);
+		}
 	}
 }
 

@@ -69,7 +69,6 @@ void Camera::apply()
 	// устанавливаем камеру
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-
 	gluLookAt(position.x, position.y, position.z, 0, 0, 0, 0, 1, 0);
 }
 

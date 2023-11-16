@@ -3,21 +3,23 @@
 GraphicObject::GraphicObject()
 {
 
-	this->modelMatrix = new GLfloat[16]{
+	modelMatrix = new GLfloat[16]{
 		1.0, 0.0, 0.0, 0.0, // ось Ox
 		0.0, 1.0, 0.0, 0.0, // ось Oy
 		0.0, 0.0, 1.0, 0.0, // ось Oz
 		0.0, 0.0, 0.0, 1.0  // позиция объекта (начало системы координат)
 	};
 
-	this->color = vec3(1, 0, 0);
-	this->angle = 0;
+	color = vec3(1, 0, 0);
+	angle = 0;
 }
 
 
 void GraphicObject::setPosition(vec3 position)
 {
 	this->position = position;
+	//по новой расчитываем матрицу 
+	recalculateModelMatrix();
 }
 
 vec3 GraphicObject::getPosition()
@@ -27,7 +29,8 @@ vec3 GraphicObject::getPosition()
 
 void GraphicObject::setAngle(float grad)
 {
-	this->angle = grad / 180 * 3.1415;
+	this->angle = grad / 180 * 3.1415;//по новой расчитываем матрицу 
+	recalculateModelMatrix();
 }
 
 float GraphicObject::getAngle()
@@ -44,7 +47,7 @@ vec3 GraphicObject::getColor()
 	return this->color;
 }
 
-void GraphicObject::setMaterial(shared_ptr<PhongMaterial> material)
+void GraphicObject::setMaterial(shared_ptr<Material> material)
 {
 	this->material = material;
 }
@@ -56,12 +59,6 @@ void GraphicObject::setMesh(shared_ptr<Mesh> mesh)
 
 void GraphicObject::draw()
 {
-	//по новой расчитываем матрицу 
-	recalculateModelMatrix();
-
-	//заполняем стек моделей
-	glColor3f(color.r, color.g, color.b);
-
 	//заполняем материал при наличии
 	if (material != nullptr) {
 		material->apply();
@@ -72,11 +69,7 @@ void GraphicObject::draw()
 	//заполнямем мэш
 	if (mesh != nullptr) {
 		mesh->draw();
-	}
-	else {
-		glutSolidTeapot(1);
-	}
-	
+	}	
 	glPopMatrix();
 }
 

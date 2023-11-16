@@ -1,18 +1,22 @@
 {
   "pathToMesh": "../AdditionalData/meshes/",
   "pathToMaterials": "../AdditionalData/materials.json",
+  "pathToTextures": "../AdditionalData/textures/",
   "objects": {
     "LightObject": {
-      "mesh": "ChamferBox",
-      "material": 1
+      "mesh": "HighPolyBox",
+      "material": 1,
+      "texture": "light_object.png"
     },
     "HeavyObject": {
-      "mesh": "ChamferBox",
-      "material": 2
+      "mesh": "HighPolyBox",
+      "material": 2,
+      "texture": "heavy_object.png"
     },
     "BorderObject": {
-      "mesh": "Box",
-      "material": 3
+      "mesh": "HighPolyBox",
+      "material": 3,
+      "texture": "border_object.png"
     },
     "Player": {
       "mesh": "Sphere",
@@ -27,8 +31,9 @@
       "material": 6
     },
     "Field": {
-      "mesh": "SimplePlane",
-      "material": 8
+      "mesh": "HighPolyPlane",
+      "material": 8,
+      "texture": "plane.jpg"
     }
   }
 }
