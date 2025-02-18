@@ -76,12 +76,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\glm;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\freeglut\include\GL;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\jsonParser;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\glew-2.1.0\include\GL;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\DevIL Windows SDK\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Libraries\glm;$(SolutionDir)..\Libraries\freeglut\include\GL;$(SolutionDir)..\Libraries\jsonParser;$(SolutionDir)..\Libraries\glew-2.1.0\include\GL;$(SolutionDir)..\Libraries\DevIL Windows SDK\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\freeglut\lib\x64;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\glew-2.1.0\lib\Release\x64;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\DevIL Windows SDK\lib\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\Libraries\freeglut\lib\x64;$(SolutionDir)..\Libraries\DevIL Windows SDK\lib\x64\Release;$(SolutionDir)..\Libraries\glew-2.1.0\lib\Release\x64;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\DevIL Windows SDK\lib\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glu32.lib;freeglut.lib;glew32.lib;DevIL.lib;ILU.lib;ILUT.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -107,12 +107,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\glm;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\freeglut\include\GL;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\jsonParser;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\glew-2.1.0\include\GL;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\DevIL Windows SDK\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\Libraries\glm;$(SolutionDir)..\Libraries\freeglut\include\GL;$(SolutionDir)..\Libraries\jsonParser;$(SolutionDir)..\Libraries\glew-2.1.0\include\GL;$(SolutionDir)..\Libraries\DevIL Windows SDK\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\freeglut\lib\x64;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\glew-2.1.0\lib\Release\x64;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\DevIL Windows SDK\lib\x64\unicode\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)..\Libraries\freeglut\lib\x64;$(SolutionDir)..\Libraries\DevIL Windows SDK\lib\x64\Release;$(SolutionDir)..\Libraries\glew-2.1.0\lib\Release\x64;C:\Users\vasil\OneDrive\Desktop\Граффика\openGL_Abilities\Libraries\DevIL Windows SDK\lib\x64\unicode\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glu32.lib;freeglut.lib;glew32.lib;DevIL.lib;ILU.lib;ILUT.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

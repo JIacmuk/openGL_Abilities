@@ -16,6 +16,8 @@
 # Mono auto generated files
 mono_crash.*
 
+
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -362,3 +364,12 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 .html
+
+#СУ-КА где exeшники библиотек
+!Libraries/**
+
+#На хуй ебучий html
+Libraries/**/*.html
+
+#ебучий райдер
+.idea
